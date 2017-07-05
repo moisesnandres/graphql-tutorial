@@ -16,6 +16,9 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "express": "^4.15.2"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.2",
+    "graphql-server-express": "^1.0.0",
+    "graphql-tools": "^1.1.0"
   }
 }
