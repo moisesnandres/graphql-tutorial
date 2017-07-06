@@ -1,9 +1,16 @@
 import React from 'react';
-const AddChannel = () => {
+import { gql, graphql } from 'react-apollo';
+
+const AddChannel = ({ mutate }) => {
   const handleKeyUp = (evt) => {
     if (evt.keyCode === 13) {
-      console.log(evt.target.value);
-      evt.target.value = '';
+      evt.persist();
+      mutate({
+        variables: { name: evt.target.value }
+      })
+      .then( res => {
+        evt.target.value = '';
+      });
     }
   };
   return (
@@ -14,4 +21,18 @@ const AddChannel = () => {
     />
   );
 };
-export default AddChannel;
+
+const addChannelMutation = gql`
+  mutation addChannel($name: String!) {
+    addChannel(name: $name) {
+      id
+      name
+    }
+  }
+`;
+
+const AddChannelWithMutation = graphql(
+  addChannelMutation
+)(AddChannel);
+
+export default AddChannelWithMutation;
