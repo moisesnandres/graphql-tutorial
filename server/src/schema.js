@@ -16,6 +16,11 @@ type Message {
   text: String
 }
 
+input MessageInput{
+  channelId: ID!
+  text: String
+}
+
 type Query {
    channels: [Channel]
    channel(id: ID!): Channel
@@ -23,6 +28,7 @@ type Query {
 
 type Mutation {
   addChannel(name: String!): Channel
+  addMessage(message: MessageInput!): Message
 }
 `;
 const schema = makeExecutableSchema({ typeDefs, resolvers });
